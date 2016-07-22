@@ -1,0 +1,35 @@
+.event-title {
+    margin-bottom: 20px;
+}
+.event-container {
+    margin: 10px;
+}
+.add-time-block {
+    margin: 10px 0;
+}
+.add-time-btn {
+    vertical-align: top;
+}
+.time-btn{
+    margin: 5px;
+}
+
+.event-container .full-width {
+    width: 100%;
+}
+.event-list md-card {
+    margin: 10px 0;
+}
+[md-fab] {
+    position: absolute;
+    right: 3%;
+    top: 34px;
+    z-index: 1;
+}
+.row {
+    margin: 5px 0;
+}
+.row md-icon {
+    margin-right: 5px;
+    vertical-align: middle;
+}

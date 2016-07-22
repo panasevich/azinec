@@ -1,0 +1,105 @@
+<md-toolbar color="primary">
+    Admin bar
+</md-toolbar>
+<div class="event-container">
+    <button md-fab md-raised-button color="accent" (click)="createEvent=!createEvent">
+        <md-icon>add</md-icon>
+    </button>
+    <h1 class="event-title center">{{title}}</h1>
+    <md-card *ngIf="createEvent">
+        <md-card-title align="center">
+            Create new event
+        </md-card-title>
+        <form class="event-form"
+              [formGroup]="eventForm"
+              (submit)="add(eventForm.value)">
+            <md-input dividerColor="primary" formControlName="eventTitle" placeholder="Enter new event"
+                      class="full-width">
+            </md-input>
+            <table style="width: 100%" cellspacing="0">
+                <tr>
+                    <td>
+                        <md-input type="date" value="01.01.2016" min="01.01.2016" formControlName="eventStart"
+                                  class="full-width"
+                                  placeholder="Start event"></md-input>
+                    </td>
+                    <td>
+                        <md-input type="date" value="01.01.2016" formControlName="eventEnd" class="full-width"
+                                  placeholder="End event"></md-input>
+                    </td>
+                </tr>
+            </table>
+            <md-input dividerColor="primary" formControlName="seats" placeholder="Enter seats number"
+                      class="full-width"></md-input>
+
+
+
+            <button type="button" class="full-width" md-raised-button color="primary" (click)="sessionFlag=!sessionFlag">Add
+                session
+            </button>
+
+            <md-card-content>
+                <div>
+
+                </div>
+                    <span *ngFor="let time of times">
+                        <button md-raised-button class="accept" class="time-btn" color="warn">{{time}}</button>
+                        <input type="hidden" formControlName="time" value="{{times}}">
+                    </span>
+
+                <div class="add-time-block" *ngIf="sessionFlag">
+                    <md-input type="time" #timeAdd placeholder="Add time" value="00:00"></md-input>
+                    <button type="button" md-raised-button class="add-time-btn" (click)="addTime(timeAdd.value)">Add
+                        time
+                    </button>
+                </div>
+            </md-card-content>
+
+            <md-input formControlName="limit" placeholder="Registration limit" class="full-width"></md-input>
+            <div class="select" >
+                <input type="hidden" formControlName="status" value="selectId.value" >
+                <select #selectId (click)="addStatus(selectId.value)">
+                    <option selected disabled>Status</option>
+                    <option value="draft">Draft</option>
+                    <option value="open">Open</option>
+                    <option value="sold out">Sold out</option>
+                    <option value="closed">Closed</option>
+                </select>
+            </div>
+
+
+
+            <button class="full-width" type="submit" md-raised-button color="primary" align="center" [disabled]="!eventForm.valid">
+                Add event
+            </button>
+        </form>
+    </md-card>
+
+
+    <div class="event-list">
+
+        <md-card *ngFor="let event of events;" class="event-item" (click)="remove(event._id);">
+            <md-card-title>{{event.eventTitle}}</md-card-title>
+            <md-card-content>
+                <div>{{event.description}}</div>
+                <div class="row">
+                    <md-icon>date_range</md-icon>
+                    <b>Start:</b>&nbsp; {{event.eventStart | date: 'dd/MM/yyyy'}}&nbsp;-&nbsp; <b>End:</b>&nbsp;
+                    {{event.eventEnd | date: 'dd/MM/yyyy'}}
+                </div>
+                <div class="row">
+                    <md-icon>event_seat</md-icon>
+                    <b>Seats:</b>&nbsp; {{event.seats}}
+                </div>
+                <div class="row">
+                    <md-icon>query_builder</md-icon>
+                    <b>Times:</b>
+                    <span *ngFor="let time of event.time">
+                        <button md-raised-button color="accent" class="time-btn">{{time}}</button>
+                    </span>
+                </div>
+            </md-card-content>
+        </md-card>
+
+    </div>
+</div>
