@@ -4,13 +4,17 @@ System.config({
       '@angular/*': './@angular/*',
       '@angular2-material/*': './@angular2-material/**/*',
       "rxjs/*": "./rxjs/*",
-      "reflect-metadata": "./reflect-metadata"
+      "reflect-metadata": "./reflect-metadata",
+      "angular2-jwt": "./angular2-jwt"
     },
     map: {
       "rxjs": "./rxjs",
       '@angular2-material': './@angular2-material'
     },
     packages: {
+      'angular2-jwt':{
+        main: 'angular2-jwt'
+      },
       '@angular2-material/core':{
         main: 'core'
       },
