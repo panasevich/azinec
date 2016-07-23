@@ -1,9 +1,7 @@
 .event-title {
-    margin-bottom: 20px;
+    margin: 10px 0;
 }
-.event-container {
-    margin: 10px;
-}
+
 .add-time-block {
     margin: 10px 0;
 }
@@ -14,12 +12,6 @@
     margin: 5px;
 }
 
-.event-container .full-width {
-    width: 100%;
-}
-.event-list md-card {
-    margin: 10px 0;
-}
 [md-fab] {
     position: absolute;
     right: 3%;

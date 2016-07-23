@@ -10,7 +10,6 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 };
 var core_1 = require('@angular/core');
 var forms_1 = require('@angular/forms');
-var router_1 = require('@angular/router');
 var event_service_1 = require('../../event/services/event-service');
 var button_1 = require('@angular2-material/button');
 var toolbar_1 = require('@angular2-material/toolbar');
@@ -18,33 +17,37 @@ var card_1 = require('@angular2-material/card');
 var input_1 = require('@angular2-material/input');
 var radio_1 = require('@angular2-material/radio');
 var icon_1 = require('@angular2-material/icon');
-var Home = (function () {
-    function Home(_eventService, router) {
+var router_1 = require('@angular/router');
+var SingleEvent = (function () {
+    function SingleEvent(_eventService, route, fb) {
         this._eventService = _eventService;
-        this.router = router;
-        this.title = "Events list";
-        this.events = [];
+        this.route = route;
+        this.event = [];
+        this.registrationToggle = false;
+        this.registerForm = fb.group({
+            "name": ["", forms_1.Validators.required],
+            "surname": ["", forms_1.Validators.required],
+            "email": ["", forms_1.Validators.required],
+            "phone": ["", forms_1.Validators.required],
+            "company": ["", forms_1.Validators.required]
+        });
     }
-    Home.prototype.ngOnInit = function () {
-        this._getAll();
+    SingleEvent.prototype.ngOnInit = function () {
+        this._getOne(this.route.params._value.id);
     };
-    Home.prototype._getAll = function () {
+    SingleEvent.prototype._getOne = function (id) {
         var _this = this;
         this._eventService
-            .getAll()
+            .getOne(id)
             .subscribe(function (events) {
-            _this.events = events;
+            _this.event = events;
         });
     };
-    Home.prototype.goToEvent = function (event) {
-        var link = ['/event', event._id];
-        this.router.navigate(link);
-    };
-    Home = __decorate([
+    SingleEvent = __decorate([
         core_1.Component({
-            selector: 'home',
-            templateUrl: 'home/templates/home.html',
-            styleUrls: ['home/styles/home.css'],
+            selector: 'singleEvent',
+            templateUrl: 'singleEvent/templates/singleEvent.html',
+            styleUrls: ['singleEvent/styles/singleEvent.css'],
             directives: [
                 forms_1.REACTIVE_FORM_DIRECTIVES,
                 button_1.MD_BUTTON_DIRECTIVES,
@@ -56,8 +59,8 @@ var Home = (function () {
             ],
             providers: [event_service_1.EventService, icon_1.MdIconRegistry]
         }), 
-        __metadata('design:paramtypes', [event_service_1.EventService, router_1.Router])
-    ], Home);
-    return Home;
+        __metadata('design:paramtypes', [event_service_1.EventService, router_1.ActivatedRoute, forms_1.FormBuilder])
+    ], SingleEvent);
+    return SingleEvent;
 }());
-exports.Home = Home;
+exports.SingleEvent = SingleEvent;

@@ -29,6 +29,7 @@ var EventCmp = (function () {
         this.statusValue = "";
         this.eventForm = fb.group({
             "eventTitle": ["", forms_1.Validators.required],
+            "description": ["", forms_1.Validators.required],
             "eventStart": ["", forms_1.Validators.required],
             "eventEnd": ["", forms_1.Validators.required],
             "seats": ["", forms_1.Validators.required],
@@ -56,6 +57,7 @@ var EventCmp = (function () {
             _this.events.push(m);
             _this.eventForm.controls['eventTitle'].updateValue("");
             _this.eventForm.controls['eventStart'].updateValue("");
+            _this.eventForm.controls['description'].updateValue("");
             _this.eventForm.controls['eventEnd'].updateValue("");
             _this.eventForm.controls['seats'].updateValue("");
             _this.eventForm.controls['time'].updateValue("");

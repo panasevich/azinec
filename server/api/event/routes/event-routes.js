@@ -11,6 +11,7 @@ module.exports = class EventRoutes {
 
       router
         .route('/api/events/:id')
+        .get(EventController.getOne)
         .delete(EventController.deleteEvent);
     }
 }

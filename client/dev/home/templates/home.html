@@ -1,1 +1,22 @@
-<h1>Hello, {{name}}!</h1>
+<md-card *ngFor="let event of events;" class="event-item" (click)="goToEvent(event);">
+    <md-card-title>{{event.eventTitle}}</md-card-title>
+    <md-card-content>
+        <div class="row">
+            <md-icon>date_range</md-icon>
+            <b>Start:</b>&nbsp; {{event.eventStart | date: 'dd/MM/yyyy'}}&nbsp;-&nbsp; <b>End:</b>&nbsp;
+            {{event.eventEnd | date: 'dd/MM/yyyy'}}
+        </div>
+        <div class="row">
+            <md-icon>event_seat</md-icon>
+            <b>Seats:</b>&nbsp; {{event.seats}}
+        </div>
+        <div class="row">
+            <md-icon>query_builder</md-icon>
+            <b>Times:</b>
+                    <span *ngFor="let time of event.time">
+                        <button md-raised-button color="accent" class="time-btn">{{time}}</button>
+                    </span>
+        </div>
+    </md-card-content>
+
+</md-card>

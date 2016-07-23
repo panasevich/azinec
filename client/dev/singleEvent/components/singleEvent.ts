@@ -12,16 +12,9 @@ import {
     FormControl
 } from '@angular/forms';
 
-import {Router, ROUTER_DIRECTIVES} from '@angular/router';
-
 import {
     EventService
 } from '../../event/services/event-service';
-
-type Event = {
-    eventTitle: string;
-    _id: string;
-}
 
 import { MdUniqueSelectionDispatcher } from '@angular2-material/core';
 import { MD_BUTTON_DIRECTIVES } from '@angular2-material/button';
@@ -31,10 +24,17 @@ import { MD_INPUT_DIRECTIVES } from '@angular2-material/input';
 import { MD_RADIO_DIRECTIVES} from '@angular2-material/radio';
 import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 
+import {Router, ROUTER_DIRECTIVES, ActivatedRoute} from '@angular/router';
+
+type Event = {
+    eventTitle: string;
+    _id: string;
+}
+
 @Component({
-    selector: 'home',
-    templateUrl: 'home/templates/home.html',
-    styleUrls: ['home/styles/home.css'],
+    selector: 'singleEvent',
+    templateUrl: 'singleEvent/templates/singleEvent.html',
+    styleUrls: ['singleEvent/styles/singleEvent.css'],
     directives: [
         REACTIVE_FORM_DIRECTIVES,
         MD_BUTTON_DIRECTIVES,
@@ -46,27 +46,33 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
     ],
     providers: [EventService, MdIconRegistry]
 })
-export class Home implements onInit{
-    title:string = "Events list";
-    events:Event[] = [];
+export class SingleEvent implements onInit {
+    event: Event[] = [];
+    registrationToggle:Boolean = false;
+    eventForm:FormGroup;
 
-    constructor(private _eventService:EventService, private router: Router) {
-
+    constructor(private _eventService:EventService,
+        private route:ActivatedRoute,
+        fb:FormBuilder) {
+        this.registerForm = fb.group({
+            "name": ["", Validators.required],
+            "surname": ["", Validators.required],
+            "email": ["", Validators.required],
+            "phone": ["", Validators.required],
+            "company": ["", Validators.required]
+        });
     }
 
     ngOnInit() {
-        this._getAll();
+        this._getOne(this.route.params._value.id);
     }
 
-    private _getAll():void {
+    private _getOne(id):void {
         this._eventService
-            .getAll()
+            .getOne(id)
             .subscribe((events) => {
-                this.events = events;
+                this.event = events;
             });
     }
-    goToEvent(event){
-        let link = ['/event', event._id];
-        this.router.navigate(link);
-    }
+
 }

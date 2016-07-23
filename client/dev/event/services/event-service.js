@@ -23,6 +23,11 @@ var EventService = (function () {
             .get(EventService.ENDPOINT.replace(':id', ''))
             .map(function (r) { return r.json(); });
     };
+    EventService.prototype.getOne = function (id) {
+        return this._http
+            .get(EventService.ENDPOINT.replace(':id', id))
+            .map(function (r) { return r.json(); });
+    };
     EventService.prototype.add = function (message) {
         var _messageStringified = message;
         var headers = new http_1.Headers();

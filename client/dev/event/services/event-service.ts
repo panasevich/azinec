@@ -27,6 +27,12 @@ export class EventService {
                .get(EventService.ENDPOINT.replace(':id', ''))
                .map((r) => r.json());
   }
+    getOne(id: string):Observable<any> {
+        return this._http
+            .get(EventService.ENDPOINT.replace(':id', id))
+            .map((r) => r.json());
+    }
+
 
   add(message):Observable<any> {
     let _messageStringified = message;

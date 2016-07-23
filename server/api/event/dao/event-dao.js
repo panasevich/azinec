@@ -18,6 +18,20 @@ eventSchema.statics.getAll = () => {
       });
 }
 
+eventSchema.statics.getOne = (id) => {
+    return new Promise((resolve, reject) => {
+        if (!_.isString(id))
+            return reject(new TypeError('Id is not a valid string.'));
+
+        Event
+            .find({"_id": id})
+            .exec((err, event) => {
+                err ? reject(err)
+                    : resolve(event);
+            });
+    });
+}
+
 eventSchema.statics.createEvent = (event) => {
     return new Promise((resolve, reject) => {
       if (!_.isObject(event))

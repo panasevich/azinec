@@ -10,6 +10,15 @@ module.exports = class EventController {
         .catch(error => res.status(400).json(error));
   }
 
+  static getOne(req, res) {
+    let _id = req.params.id;
+
+    EventDAO
+        .getOne(_id)
+        .then(event => res.status(200).json(event))
+        .catch(error => res.status(400).json(error));
+  }
+
   static createEvent(req, res) {
       let _event = req.body;
 

@@ -58,6 +58,7 @@ export class EventCmp implements OnInit {
     constructor(fb:FormBuilder, private _eventService:EventService) {
         this.eventForm = fb.group({
             "eventTitle": ["", Validators.required],
+            "description": ["", Validators.required],
             "eventStart": ["", Validators.required],
             "eventEnd": ["", Validators.required],
             "seats": ["", Validators.required],
@@ -86,6 +87,7 @@ export class EventCmp implements OnInit {
                 this.events.push(m);
                 (<FormControl>this.eventForm.controls['eventTitle']).updateValue("");
                 (<FormControl>this.eventForm.controls['eventStart']).updateValue("");
+                (<FormControl>this.eventForm.controls['description']).updateValue("");
                 (<FormControl>this.eventForm.controls['eventEnd']).updateValue("");
                 (<FormControl>this.eventForm.controls['seats']).updateValue("");
                 (<FormControl>this.eventForm.controls['time']).updateValue("");

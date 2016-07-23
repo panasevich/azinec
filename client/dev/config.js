@@ -18,6 +18,12 @@ System.config({
       '@angular2-material/core':{
         main: 'core'
       },
+      '@angular2-material/sidenav':{
+        main: 'sidenav'
+      },
+      '@angular2-material/list':{
+        main: 'list'
+      },
       '@angular2-material/button':{
         main: 'button'
       },
