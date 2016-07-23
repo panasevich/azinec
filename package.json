@@ -5,8 +5,6 @@
   "scripts": {
     "start": "node index",
     "watch": "gulp",
-    "preinstall": "typings install",
-    "postinstall": "tsc",
     "dev": "tsc && concurrently \"npm start\" \"gulp\"",
     "build-dev": "node index && gulp client.watch",
     "build-dist": "gulp client.build:dist",
