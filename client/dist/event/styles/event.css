@@ -1,0 +1,27 @@
+.event-title {
+    margin: 10px 0;
+}
+
+.add-time-block {
+    margin: 10px 0;
+}
+.add-time-btn {
+    vertical-align: top;
+}
+.time-btn{
+    margin: 5px;
+}
+
+[md-fab] {
+    position: absolute;
+    right: 3%;
+    top: 34px;
+    z-index: 1;
+}
+.row {
+    margin: 5px 0;
+}
+.row md-icon {
+    margin-right: 5px;
+    vertical-align: middle;
+}
