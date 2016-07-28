@@ -46,7 +46,7 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
     ],
     providers: [EventService, MdIconRegistry]
 })
-export class Home implements onInit{
+export class Home implements OnInit {
     title:string = "Events list";
     events:Event[] = [];
 

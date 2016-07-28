@@ -46,15 +46,21 @@ type Event = {
     ],
     providers: [EventService, MdIconRegistry]
 })
-export class SingleEvent implements onInit {
-    event: Event[] = [];
+export class SingleEvent implements OnInit {
+    event:Event[] = [];
     registrationToggle:Boolean = false;
-    eventForm:FormGroup;
+    popup:boolean = false;
+    id:string;
+    registerForm:FormGroup;
+    postUnsuccess:boolean = false;
+    postSuccess:boolean = false;
 
     constructor(private _eventService:EventService,
-        private route:ActivatedRoute,
-        fb:FormBuilder) {
+                private route:ActivatedRoute,
+                fb:FormBuilder) {
         this.registerForm = fb.group({
+            "id": [this.route.params._value.id, Validators.required],
+            "time": ["", Validators.required],
             "name": ["", Validators.required],
             "surname": ["", Validators.required],
             "email": ["", Validators.required],
@@ -65,6 +71,7 @@ export class SingleEvent implements onInit {
 
     ngOnInit() {
         this._getOne(this.route.params._value.id);
+        console.log(this.route.params._value.id);
     }
 
     private _getOne(id):void {
@@ -73,6 +80,40 @@ export class SingleEvent implements onInit {
             .subscribe((events) => {
                 this.event = events;
             });
+    }
+
+    userRegistration(data):void {
+        this.id = this.route.params._value.id;
+        this._eventService
+            .userRegistration(data)
+            .subscribe((m) => {
+                console.log(m);
+                (<FormControl>this.registerForm.controls['time']).updateValue("");
+                (<FormControl>this.registerForm.controls['name']).updateValue("");
+                (<FormControl>this.registerForm.controls['surname']).updateValue("");
+                (<FormControl>this.registerForm.controls['email']).updateValue("");
+                (<FormControl>this.registerForm.controls['phone']).updateValue("");
+                (<FormControl>this.registerForm.controls['company']).updateValue("");
+                this.registrationToggle = false;
+                this.postSuccess = true;
+            },
+                err => {
+                    this.registrationToggle = false;
+                    this.postUnsuccess = true;
+            }
+        );
+
+    }
+
+    popupClose(){
+        this.popup = false;
+        this.postSuccess = false;
+        this.postUnsuccess = false;
+    }
+
+    registrationButton() {
+        this.popup = true;
+        this.registrationToggle = true;
     }
 
 }

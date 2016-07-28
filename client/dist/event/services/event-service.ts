@@ -34,19 +34,33 @@ export class EventService {
     }
 
 
-  add(message):Observable<any> {
-    let _messageStringified = message;
+  add(event):Observable<any> {
     let headers = new Headers();
 
     headers.append('Content-Type', 'application/json');
 
     return this._http
-               .post(EventService.ENDPOINT.replace(':id', ''), _messageStringified, {headers})
+               .post(EventService.ENDPOINT.replace(':id', ''), event, {headers})
                .map((r) => r.json());
   }
+
+    register(id, user):Observable<any> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this._http
+            .post(EventService.ENDPOINT.replace(':id', id), user, {headers})
+    }
 
   remove(id: string):Observable<any> {
     return this._http
                .delete(EventService.ENDPOINT.replace(':id', id));
   }
+    userRegistration(user):Observable<any> {
+        let headers = new Headers();
+        headers.append('Content-Type', 'application/json');
+
+        return this._http
+            .post(EventService.ENDPOINT.replace(':id', 'register'), user, {headers})
+    }
 }
