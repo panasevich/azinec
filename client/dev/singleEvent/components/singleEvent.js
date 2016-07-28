@@ -24,7 +24,12 @@ var SingleEvent = (function () {
         this.route = route;
         this.event = [];
         this.registrationToggle = false;
+        this.popup = false;
+        this.postUnsuccess = false;
+        this.postSuccess = false;
         this.registerForm = fb.group({
+            "id": [this.route.params._value.id, forms_1.Validators.required],
+            "time": ["", forms_1.Validators.required],
             "name": ["", forms_1.Validators.required],
             "surname": ["", forms_1.Validators.required],
             "email": ["", forms_1.Validators.required],
@@ -34,6 +39,7 @@ var SingleEvent = (function () {
     }
     SingleEvent.prototype.ngOnInit = function () {
         this._getOne(this.route.params._value.id);
+        console.log(this.route.params._value.id);
     };
     SingleEvent.prototype._getOne = function (id) {
         var _this = this;
@@ -42,6 +48,35 @@ var SingleEvent = (function () {
             .subscribe(function (events) {
             _this.event = events;
         });
+    };
+    SingleEvent.prototype.userRegistration = function (data) {
+        var _this = this;
+        this.id = this.route.params._value.id;
+        this._eventService
+            .userRegistration(data)
+            .subscribe(function (m) {
+            console.log(m);
+            _this.registerForm.controls['time'].updateValue("");
+            _this.registerForm.controls['name'].updateValue("");
+            _this.registerForm.controls['surname'].updateValue("");
+            _this.registerForm.controls['email'].updateValue("");
+            _this.registerForm.controls['phone'].updateValue("");
+            _this.registerForm.controls['company'].updateValue("");
+            _this.registrationToggle = false;
+            _this.postSuccess = true;
+        }, function (err) {
+            _this.registrationToggle = false;
+            _this.postUnsuccess = true;
+        });
+    };
+    SingleEvent.prototype.popupClose = function () {
+        this.popup = false;
+        this.postSuccess = false;
+        this.postUnsuccess = false;
+    };
+    SingleEvent.prototype.registrationButton = function () {
+        this.popup = true;
+        this.registrationToggle = true;
     };
     SingleEvent = __decorate([
         core_1.Component({

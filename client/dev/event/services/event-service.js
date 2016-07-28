@@ -28,17 +28,28 @@ var EventService = (function () {
             .get(EventService.ENDPOINT.replace(':id', id))
             .map(function (r) { return r.json(); });
     };
-    EventService.prototype.add = function (message) {
-        var _messageStringified = message;
+    EventService.prototype.add = function (event) {
         var headers = new http_1.Headers();
         headers.append('Content-Type', 'application/json');
         return this._http
-            .post(EventService.ENDPOINT.replace(':id', ''), _messageStringified, { headers: headers })
+            .post(EventService.ENDPOINT.replace(':id', ''), event, { headers: headers })
             .map(function (r) { return r.json(); });
+    };
+    EventService.prototype.register = function (id, user) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this._http
+            .post(EventService.ENDPOINT.replace(':id', id), user, { headers: headers });
     };
     EventService.prototype.remove = function (id) {
         return this._http
             .delete(EventService.ENDPOINT.replace(':id', id));
+    };
+    EventService.prototype.userRegistration = function (user) {
+        var headers = new http_1.Headers();
+        headers.append('Content-Type', 'application/json');
+        return this._http
+            .post(EventService.ENDPOINT.replace(':id', 'register'), user, { headers: headers });
     };
     EventService.ENDPOINT = '/api/events/:id';
     EventService = __decorate([

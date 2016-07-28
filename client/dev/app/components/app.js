@@ -18,7 +18,12 @@ var router_1 = require('@angular/router');
 var App = (function () {
     function App(router) {
         this.router = router;
+        this.registered = localStorage.getItem('id_token');
     }
+    App.prototype.logout = function () {
+        localStorage.removeItem('id_token');
+        this.registered = false;
+    };
     App = __decorate([
         core_1.Component({
             selector: 'app',

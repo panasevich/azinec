@@ -1,5 +1,55 @@
 <div *ngFor="let event of event">
+    <div class="popup-table" *ngIf="popup">
+        <div class="popup-cell">
+            <div class="overlay" (click)="popupClose()"></div>
+            <div class="popup-wrapper">
+                <md-card *ngIf="postSuccess" align="center">
+                    <button md-fab md-raised-button color="primary" (click)="popupClose()">
+                        <md-icon>check</md-icon>
+                    </button>
+                    <md-card-title>Success</md-card-title>
+                </md-card>
+                <md-card *ngIf="postUnsuccess">
+                    <button md-fab md-raised-button color="warn" (click)="popupClose()">
+                        <md-icon>close</md-icon>
+                    </button>
+                    <md-card-title>Unsuccess</md-card-title>
+                </md-card>
+                <md-card *ngIf="registrationToggle">
+                    <md-icon class="popup-close" (click)="popup=!popup">close</md-icon>
+                    <md-card-title align="center">Registration</md-card-title>
+                    <md-card-content>
+                        <form [formGroup]="registerForm" (submit)="userRegistration(registerForm.value)">
+                            <input type="hidden" formControlName="id">
+                            <table style="width: 100%">
+                                <tr>
+                                    <td style="white-space: nowrap">Check time</td>
+                                    <td>
+                                        <label *ngFor="let time of event.time">
+                                            <input formControlName="time" name="time" type="radio" value="{{time}}">
+                                            <span md-button color="warn">{{time}}</span>
+                                        </label>
+                                    </td>
+                                </tr>
+                            </table>
+
+                            <md-input formControlName="name" class="full-width" placeholder="First name"></md-input>
+                            <md-input formControlName="surname" class="full-width" placeholder="Last name"></md-input>
+                            <md-input type="mail" formControlName="email" class="full-width" placeholder="Email"></md-input>
+                            <md-input formControlName="phone" class="full-width" placeholder="Phone"></md-input>
+                            <md-input formControlName="company" class="full-width" placeholder="Company"></md-input>
+                            <button class="full-width" type="submit" md-raised-button color="primary" align="center"
+                                    [disabled]="!registerForm.valid">
+                                Submit
+                            </button>
+                        </form>
+                    </md-card-content>
+                </md-card>
+            </div>
+        </div>
+    </div>
     <md-card>
+
         <md-card-title align="center">{{event.eventTitle}}</md-card-title>
         <md-card-content>
             <div class="row desription">
@@ -21,39 +71,12 @@
                 </span>
             </div>
             <div class="row">
-                <button md-raised-button color="warn" class="full-width" (click)="registrationToggle=!registrationToggle">
+                <button md-raised-button color="warn" (click)="registrationButton()">
                     Registration
                 </button>
             </div>
 
-            <md-card *ngIf="registrationToggle">
-                <md-card-title align="center">Fill the fields</md-card-title>
-                <md-card-content>
-                    <form [formGroup]="registerForm" (submit)="register(eventForm.value)">
-                        <table style="width: 100%">
-                            <tr>
-                                <td style="white-space: nowrap">Check time</td>
-                                <td>
-                                    <label *ngFor="let time of event.time">
-                                        <input name="time" type="radio" value="{{time}}">
-                                        <span md-button color="warn">{{time}}</span>
-                                    </label>
-                                </td>
-                            </tr>
-                        </table>
 
-                        <md-input formControlName="name" class="full-width" placeholder="First name"></md-input>
-                        <md-input formControlName="surname" class="full-width" placeholder="Last name"></md-input>
-                        <md-input formControlName="email" class="full-width" placeholder="Email"></md-input>
-                        <md-input formControlName="phone" class="full-width" placeholder="Phone"></md-input>
-                        <md-input formControlName="company" class="full-width" placeholder="Company"></md-input>
-                        <button class="full-width" type="submit" md-raised-button color="primary" align="center"
-                                [disabled]="!registerForm.valid">
-                            Submit
-                        </button>
-                    </form>
-                </md-card-content>
-            </md-card>
         </md-card-content>
     </md-card>
 </div>

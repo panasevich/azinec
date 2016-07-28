@@ -18,6 +18,7 @@ import {MdIcon, MdIconRegistry} from '@angular2-material/icon';
 
 import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 
+
 @Component({
     selector: 'app',
     templateUrl: 'app/templates/app.html',
@@ -34,6 +35,14 @@ import {Router, ROUTER_DIRECTIVES} from '@angular/router';
 })
 
 export class App {
+    registered:boolean = localStorage.getItem('id_token');
+
     constructor(public router:Router) {
+
+    }
+
+    logout():void {
+        localStorage.removeItem('id_token');
+        this.registered = false;
     }
 }

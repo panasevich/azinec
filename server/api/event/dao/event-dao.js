@@ -32,6 +32,19 @@ eventSchema.statics.getOne = (id) => {
     });
 }
 
+eventSchema.statics.userRegistration = (id) => {
+    return new Promise((resolve, reject) => {
+        if (!_.isString(id))
+            return reject(new TypeError('Id is not a valid string.'));
+        Event
+            .findByIdAndUpdate(id, {$inc: {seats: -1}})
+            .exec((err, updated) => {
+                err ? reject(err)
+                    : resolve();
+            });
+    });
+}
+
 eventSchema.statics.createEvent = (event) => {
     return new Promise((resolve, reject) => {
       if (!_.isObject(event))

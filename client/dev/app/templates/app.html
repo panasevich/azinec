@@ -6,10 +6,18 @@
                 <span md-line>Home</span>
                 <span md-line class="secondary">Home page</span>
             </a>
-            <a md-list-item [routerLink]="['/admin']" (click)="sidenav.close()">
+            <a *ngIf="registered" md-list-item [routerLink]="['/admin']" (click)="sidenav.close()">
                 <md-icon md-list-icon>security</md-icon>
                 <span md-line>Admin</span>
                 <span md-line class="secondary">Admin page</span>
+            </a>
+            <a *ngIf="!registered" md-list-item [routerLink]="['/login']" (click)="sidenav.close()">
+                <md-icon md-list-icon>lock_open</md-icon>
+                <span md-line>Log In</span>
+            </a>
+            <a *ngIf="registered" md-list-item (mouseup)="logout()" (click)="sidenav.close()">
+                <md-icon md-list-icon>lock</md-icon>
+                <span md-line>Log Out</span>
             </a>
         </md-nav-list>
     </md-sidenav>

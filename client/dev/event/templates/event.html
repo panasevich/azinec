@@ -13,17 +13,25 @@
             <md-input dividerColor="primary" formControlName="eventTitle" placeholder="Enter new event"
                       class="full-width">
             </md-input>
-            <textarea formControlName="description"></textarea>
+            <textarea placeholder="Enter description" class="full-width" formControlName="description"></textarea>
             <table style="width: 100%" cellspacing="0">
                 <tr>
                     <td>
-                        <md-input type="date" value="01.01.2016" min="01.01.2016" formControlName="eventStart"
-                                  class="full-width"
-                                  placeholder="Start event"></md-input>
+                        <div class="date-wrapper">
+                            <md-input type="date" value="01.01.2016" min="01.01.2016" formControlName="eventStart"
+                                      class="full-width"
+                                    ></md-input>
+                            <label class="date-label">Start event</label>
+                        </div>
+
                     </td>
+                    <td>&nbsp;</td>
                     <td>
-                        <md-input type="date" value="01.01.2016" formControlName="eventEnd" class="full-width"
-                                  placeholder="End event"></md-input>
+                        <div class="date-wrapper">
+                            <md-input type="date" value="01.01.2016" formControlName="eventEnd" class="full-width"
+                                    ></md-input>
+                            <label class="date-label">End event</label>
+                        </div>
                     </td>
                 </tr>
             </table>

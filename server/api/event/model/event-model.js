@@ -11,7 +11,8 @@ const eventSchema = {
     time: {type: Array},
     status: {type: String},
     limit: {type: Number},
-    seats: {type: Number}
+    seats: {type: Number},
+    registered: {type: Array}
 };
 
 module.exports = mongoose.Schema(eventSchema);

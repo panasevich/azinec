@@ -17,6 +17,15 @@ body {
     border-bottom: 1px solid #9E9E9E;
     margin: 10px 0;
 }
+textarea {
+    border: 0;
+    border-bottom: 1px solid #9E9E9E;
+    outline: none;
+    font: 14px Roboto, Helvetica, Arial, sans-serif;
+}
+textarea:focus {
+    border-bottom: 2px solid #009688;
+}
 .select select {
     height: 30px;
     border: 0;
@@ -37,4 +46,39 @@ md-card {
 md-card md-icon {
     margin-right: 5px;
     vertical-align: middle;
+}
+.popup-table {
+    display: table;
+    position: fixed;
+    width: 100%;
+    height: 100%;
+    z-index: 5;
+    vertical-align: middle;
+    top: 0;
+}
+.popup-cell {
+    background: rgba(255, 255, 255, 0.45);
+    display: table-cell;
+    vertical-align: middle;
+    text-align: center;
+}
+.popup-table .overlay {
+    position: absolute;
+    top: 0;
+    right: 0;
+    bottom: 0;
+    left: 0;
+    z-index: 1;
+}
+.popup-wrapper {
+    position: relative;
+    z-index: 2;
+    max-width: 500px;
+    margin: 0 auto;
+}
+.popup-close {
+    position: absolute;
+    right: 3%;
+    top: 3%;
+    cursor: pointer;
 }
