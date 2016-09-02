@@ -46,7 +46,7 @@ type Event = {
     ],
     providers: [EventService, MdIconRegistry]
 })
-export class SingleEvent implements onInit {
+export class SingleEvent implements OnInit {
     event:Event[] = [];
     registrationToggle:Boolean = false;
     popup:boolean = false;

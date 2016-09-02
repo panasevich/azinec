@@ -1,0 +1,10 @@
+.event-container {
+    display: flex;
+    flex-flow: row wrap;
+}
+.event-item {
+    flex-grow: 1;
+}
+md-card {
+    cursor: pointer;
+}

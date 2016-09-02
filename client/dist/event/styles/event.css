@@ -25,3 +25,14 @@
     margin-right: 5px;
     vertical-align: middle;
 }
+.date-wrapper {
+    position: relative;
+    padding-top: 10px;
+}
+.date-label {
+    position: absolute;
+    color: #B9B9B9;
+    font-size: 11px;
+    float: right;
+    top: 3px;
+}
